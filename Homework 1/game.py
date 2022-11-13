@@ -1,58 +1,94 @@
 import sys
 import pygame
 from settings import Settings
-from character import Character
+from ship import Ship
+from bullet import Bullet
 
-class GameTime:
 
+class SidewaysShooter:
+    """Overall class to manage game assets and behavior."""
     def __init__(self):
+        """Initialize the game and create game resources"""
         pygame.init()
         self.settings = Settings()
 
-        self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
+        self.screen = pygame.display.set_mode((1200, 600))
+        self.screen_rect = (1200, 600)
+        self.settings.screen_width = self.screen.get_rect().width
+        self.settings.screen_height = self.screen.get_rect().height
         pygame.display.set_caption("Game Time")
 
-        self.character = Character(self)
+        self.ship = Ship(self)
+        self.bullets = pygame.sprite.Group()
 
     def run_game(self):
-
+        """Start the main loop for the game."""
         while True:
             self._check_events()
-            self.character.update()
+            self.ship.update()
+            self._update_bullets()
+
             self._update_screen()
 
+    # Watch for keyboard and mouse events
     def _check_events(self):
         """Respond to keypresses and mouse events"""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RIGHT:
-                    self.character.moving_right = True
-                if event.key == pygame.K_LEFT:
-                    self.character.moving_left = True
-                if event.key == pygame.K_UP:
-                    self.character.moving_up = True
-                if event.key == pygame.K_DOWN:
-                    self.character.moving_down = True
-
+                self._check_keydown_events(event)
             elif event.type == pygame.KEYUP:
-                if event.key == pygame.K_RIGHT:
-                    self.character.moving_right = False
-                if event.key == pygame.K_LEFT:
-                    self.character.moving_left = False
-                if event.key == pygame.K_UP:
-                    self.character.moving_up = False
-                if event.key == pygame.K_DOWN:
-                    self.character.moving_down = False
+                self._check_keyup_events(event)
+
+    def _check_keydown_events(self, event):
+        """Respond to keypresses"""
+        if event.key == pygame.K_RIGHT:
+            # Move the ship down
+            self.ship.moving_down = True
+        elif event.key == pygame.K_LEFT:
+            # Move ship up
+            self.ship.moving_up = True
+        elif event.key == pygame.K_q:
+            sys.exit()
+        elif event.key == pygame.K_SPACE:
+            self._fire_bullet()
+
+    def _check_keyup_events(self, event):
+        """Respond to keypresses"""
+        if event.key == pygame.K_RIGHT:
+            self.ship.moving_down = False
+        elif event.key == pygame.K_LEFT:
+            self.ship.moving_up = False
+
+    def _fire_bullet(self):
+        """Create a new bullet and add it to the bullets group"""
+        new_bullet = Bullet(self)
+        self.bullets.add(new_bullet)
+
+    def _update_bullets(self):
+        """update position of bullets and get rid of old bullets"""
+        # Update bullet position
+        self.bullets.update()
+
+        # Get rid of the bullets that have disappeared
+        for bullet in self.bullets.copy():
+            if bullet.rect.left >= 1200:
+                self.bullets.remove(bullet)
 
     def _update_screen(self):
-        """Update images on the screen"""
+        """Update images on the screen, and flip to the new screen"""
+        # Redraw the screen during each pass through the loop.
         self.screen.fill(self.settings.bg_color)
-        self.character.blitme()
+        self.ship.blitme()
+        for bullet in self.bullets.sprites():
+            bullet.draw_bullet()
 
+        # Make the most recently drawn screen visible.
         pygame.display.flip()
 
+
 if __name__ == '__main__':
-    ai = GameTime()
+    # Make a game instance and run the game
+    ai = SidewaysShooter()
     ai.run_game()
