@@ -146,7 +146,7 @@ class AlienInvasion:
         """Respond to the ship being hit by an alien"""
         if self.stats.ships_left > 0:
             # Decrement ships left
-            self.stats.ships_left += 1
+            self.stats.ships_left -= 1
 
             # Get rid of any remaining aliens and bullets
             self.aliens.empty()
