@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6686306f-682f-404d-b8fe-04113e2df77a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Homework 1/bullet.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Homework 1/ship.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Homework 2/game.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Homework 2/raindrop.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Homework 2/raindrops_game.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Homework 2/settings.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Homework 2/star.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Homework 1/character.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 1/character.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Homework 1/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 1/game.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Homework 1/images/HW1-3.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Homework 1/images/HW1-4.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 1/images/HW1-4.PNG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Homework 1/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Homework 1/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
